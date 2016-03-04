@@ -20,7 +20,8 @@ public class GpsDao {
 						GpsDB.COLUMN_NAME_ID + " varchar(32) NOT NULL, " +
 						GpsDB.COLUMN_NAME_LONGITUDE + " varchar(32) NOT NULL, " +
 						GpsDB.COLUMN_NAME_LATITUDE + " varchar(32) NOT NULL, " +
-						GpsDB.COLUMN_NAME_TIME + " varchar(32) NOT NULL, " + 
+						GpsDB.COLUMN_NAME_TIME + " DATETIME NOT NULL, " + 
+						GpsDB.COLUMN_NAME_START_TIME + " DATETIME NOT NULL " +
 						" )"
 						;
     	Connection con = DataContract.getConnection();
@@ -53,19 +54,22 @@ public class GpsDao {
 		Statement stmt = null;
 		//gps information
 		String id = gps.getId();
-		String longtitude = gps.getLongitude();
+		String longitude = gps.getLongitude();
 		String latitude = gps.getLatitude();
 		String time = gps.getTime();
-		
+		String startTime = gps.getStartTime();
+		System.out.println(gps.toString());
 		
 		try {
 	        stmt = con.createStatement();
 	        stmt.executeUpdate(
 	            "insert into " + GpsDB.TABLE_NAME +
 	            " values("+ id + "," + 
-	            		  longtitude + "," +
-	            		  latitude + "," +
-	            		  time + ")");
+	            		  longitude + "," +
+	            		  latitude + ",'" +
+	            		  time + "','" +
+	            		  startTime + "')");
+	        
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -110,6 +114,7 @@ public class GpsDao {
 				gps.setLongitude(rs.getString(GpsDB.COLUMN_NAME_LONGITUDE));
 				gps.setLatitude(rs.getString(GpsDB.COLUMN_NAME_LATITUDE));
 				gps.setTime(rs.getString(GpsDB.COLUMN_NAME_TIME));
+				gps.setStartTime(rs.getString(GpsDB.COLUMN_NAME_START_TIME));
 				gpsList.add(gps);
 			}
 			

@@ -24,6 +24,7 @@ public class DataContract {
 		public static final String COLUMN_NAME_LONGITUDE = "LONGITUDE";
 		public static final String COLUMN_NAME_LATITUDE = "LATITUDE";
 		public static final String COLUMN_NAME_TIME = "TIME";
+		public static final String COLUMN_NAME_START_TIME = "START_TIME";
 	}
 	
 	public static Connection getConnection() {
